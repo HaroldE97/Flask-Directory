@@ -1,0 +1,64 @@
+*, *::after, *::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 18px;
+    min-height: 100vh;
+    background-color: #FAFAFA;
+}
+
+fieldset, input{ border: none; }
+input, textarea{ outline: none; }
+input, label{ display: block; }
+
+fieldset{ margin-bottom: 2.5rem; }
+fieldset label{
+    margin-bottom: .75rem;
+    font-size: 14px;
+    padding-left: .75rem;
+}
+input{
+    font-size: 16px;
+    width: 100%;
+    background-color: #F3F3F3;
+    color: #333333;
+    padding: .45rem .70rem;
+    border-radius: 5px;
+}
+
+.btn{
+    display: block;
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-submit{
+    position: relative;
+    bottom: -75px;
+    background-color: #333333;
+    color: #fff;
+}
+
+.card-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30vw;
+    height: 64.72vh;
+    padding: 3.5rem 3rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px 1px gainsboro;
+}
+
+.login-form{
+    left: 100%;
+    transform: translate(-125%, -50%);
+}

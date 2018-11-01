@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% from 'macros.html' import render_field %}
+
+{% block title %}Ingresar{% endblock %}
+
+
+{% block head %}
+<style>
+    body{
+        background-image: url("{{url_for('static', filename='img/background.jpg')}}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+    <form action="" method="POST" class="card-form login-form">
+        {{render_field(form.username)}}
+        {{render_field(form.password)}}
+        {{form.submit(class="btn btn-submit")}}
+    </form>
+
+{% endblock %}
