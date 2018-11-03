@@ -62,3 +62,12 @@ input{
     left: 100%;
     transform: translate(-125%, -50%);
 }
+
+.error-list{
+    width: 100%;
+    list-style: none;
+}
+.error-item{
+    color: indianred;
+    text-align: center;
+}
