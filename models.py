@@ -23,11 +23,13 @@ class User(model):
 
     id = column(db.Integer, primary_key=True)
     username = column(db.String(25), unique=True)
+    name = column(db.String(50))
     password = column(db.String(66))
     create_date = column(db.Text, default=time.strftime("%d/%m/%Y  %H:%M:%S"))
 
-    def __init__(self, username, password):
+    def __init__(self, username, name, password):
         self.username = username
+        self.name = name
         self.password = self.__create_password(password)
 
     def __create_password(self, _password):

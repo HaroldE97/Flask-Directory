@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% from 'macros.html' import render_field %}
+
+{% block title %}Registro{% endblock %}
+
+
+{% block head %}
+<style>
+    body{
+        background-image: url("{{url_for('static', filename='img/background.jpg')}}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+    <form action="" method="POST" class="card-form register-form">
+        {{render_field(form.name)}}
+        {{render_field(form.username)}}
+        {{render_field(form.password)}}
+
+        <ul class="error-list">
+            {% for error in errors %}
+                <li class="error-item">{{error}}</li>
+            {% endfor %}
+        </ul>
+
+        {{form.submit(class="btn btn-submit")}}
+    </form>
+
+{% endblock %}
