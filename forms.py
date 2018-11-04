@@ -36,7 +36,7 @@ class PersonForm(FlaskForm):
     email = EmailField('Correo electronico', [DataRequired(), Email(errors['email'])])
     direccion = TextAreaField('Domicilio', [DataRequired()])
     telefono = TelField('Número teléfonico', [DataRequired(), length(min=8)])
-    submit = SubmitField('Enviar')
+    submit = SubmitField('Guardar')
 
 
 class LoginForm(FlaskForm):

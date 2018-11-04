@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% from 'macros.html' import person_fields %}
+
+{% block title %}Añadir nuevo{% endblock %}
+
+
+{% block body %}
+
+<form action="" method="POST" class="card-form info-person">
+    {{person_fields(form)}}
+</form>
+
+{% endblock %}

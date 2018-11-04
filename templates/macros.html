@@ -6,3 +6,32 @@
 </fieldset>
 
 {% endmacro %}
+
+
+{% macro person_fields(form) %}
+    {{form.id(**kwargs)|safe}}
+
+<fieldset>
+    {{form.name.label}}
+    {{form.name(**kwargs)|safe}}
+</fieldset>
+
+<fieldset>
+    {{form.email.label}}
+    {{form.email(**kwargs)|safe}}
+</fieldset>
+
+<fieldset>
+    {{form.direccion.label}}
+    {{form.direccion(**kwargs)|safe}}
+</fieldset>
+
+<fieldset>
+    {{form.telefono.label}}
+    {{form.telefono(**kwargs)|safe}}
+</fieldset>
+
+<fieldset>
+    {{form.submit(class="btn btn-submit")|safe}}
+</fieldset>
+{% endmacro %}

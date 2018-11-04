@@ -5,15 +5,38 @@
 
 {% block body %}
 
-<h1>Bienvenido {{user}}</h1>
+<h1 class="index-title">Bienvenido {{user}}</h1>
 
-<table>
-    <tr>
+<a href="/new" class="btn btn-add">Añadir nuevo</a>
+
+<table class="contacts-list">
+    <tr class="contacts-list-header">
         <th>Nombre completo</th>
         <th>Correo electronico</th>
         <th>Teléfono</th>
         <th>Domicilio</th>
-        <th>Ver</th>
+        <th></th>
+    </tr>
+    <tr class="contact-item">
+        <td>Harold</td>
+        <td>example@gmail.com</td>
+        <td>0000-0000</td>
+        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere labore necessitatibus quis.</td>
+        <td><a href="">editar</a></td>
+    </tr>
+    <tr class="contact-item">
+        <td>Harold</td>
+        <td>example@gmail.com</td>
+        <td>0000-0000</td>
+        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere labore necessitatibus quis.</td>
+        <td><a href="">editar</a></td>
+    </tr>
+    <tr class="contact-item">
+        <td>Harold</td>
+        <td>example@gmail.com</td>
+        <td>0000-0000</td>
+        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere labore necessitatibus quis.</td>
+        <td><a href="">editar</a></td>
     </tr>
 </table>
 

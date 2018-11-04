@@ -1,8 +1,10 @@
 from flask import Flask, render_template as render, request, redirect, url_for, flash, session
 from flask_caching import Cache
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
 from config import Config
 from models import db, Contact, User
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm, PersonForm
 
 
 app = Flask(__name__)
@@ -13,13 +15,14 @@ cache = Cache(config={'CACHE_TYPE': 'null'})
 
 @app.before_request
 def before_request():
-    if 'username' not in session and request.endpoint in ['index']:
-        return redirect(url_for('login'))
+    pass
+    #if 'username' not in session and request.endpoint in ['index', 'add']:
+     #   return redirect(url_for('login'))
 
 
 @app.route('/')
 def index():
-    username = session['username']
+    username = session.get('username') or 'Harold'
     return render('index.html', user=username)
 
 
@@ -56,6 +59,15 @@ def register():
         return redirect(url_for('login'))
 
     return render('register.html', form=form, errors=form.errors())
+
+
+@app.route('/new', methods=['GET', 'POST'])
+def new():
+    form = PersonForm(request.form)
+    if request.method == 'POST':
+        return "POST"
+
+    return render('new.html', form=form)
 
 
 if __name__ == '__main__':
