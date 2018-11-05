@@ -64,6 +64,21 @@ textarea{
     background: #474747;
 }
 
+.login_register-link{
+    display: block;
+    position: absolute;
+    bottom: 35px;
+    right: 75px;
+    color: var(--color);
+    padding: 1rem;
+}
+.login_register-link a{
+    text-decoration: none;
+    letter-spacing: 1px;
+    color: inherit;
+    font-size: 1.1rem;
+}
+
 .card-form{
     position: absolute;
     top: 50%;

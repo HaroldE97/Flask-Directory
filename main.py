@@ -4,7 +4,7 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from config import Config
 from models import db, Contact, User
-from forms import LoginForm, RegisterForm, PersonForm
+from forms import LoginForm, RegisterForm, ContactForm
 
 
 app = Flask(__name__)
@@ -16,14 +16,17 @@ cache = Cache(config={'CACHE_TYPE': 'null'})
 @app.before_request
 def before_request():
     pass
-    #if 'username' not in session and request.endpoint in ['index', 'add']:
-     #   return redirect(url_for('login'))
+    if 'username' not in session and request.endpoint in ['index', 'new']:
+        return redirect(url_for('login'))
+    elif 'username'in session and request.endpoint in ['login', 'register']:
+        return redirect(url_for('index'))
 
 
 @app.route('/')
 def index():
     username = session.get('username') or 'Harold'
-    return render('index.html', user=username)
+    contacts_list = Contact.query.filter_by(user_id=username).all()
+    return render('index.html', user=username, contacts=contacts_list)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -63,9 +66,20 @@ def register():
 
 @app.route('/new', methods=['GET', 'POST'])
 def new():
-    form = PersonForm(request.form)
+    form = ContactForm(request.form)
     if request.method == 'POST':
-        return "POST"
+        contact = Contact(
+            name=form.name.data,
+            email=form.email.data,
+            telefono=form.telefono.data,
+            domicilio=form.direccion.data,
+            user_id=session['username']
+        )
+
+        db.session.add(contact)
+        db.session.commit()
+
+        return redirect(url_for('index'))
 
     return render('new.html', form=form)
 
@@ -73,6 +87,12 @@ def new():
 if __name__ == '__main__':
     cache.init_app(app)
     db.init_app(app)
+    migrate = Migrate(app, db)
+    manager = Manager(app)
+
+    manager.add_command('db', MigrateCommand)
+
     with app.app_context():
         db.create_all()
     app.run(port=8000)
+    #manager.run()

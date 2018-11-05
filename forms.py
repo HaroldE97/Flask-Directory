@@ -30,7 +30,7 @@ class Length(object):
 length = Length
 
 
-class PersonForm(FlaskForm):
+class ContactForm(FlaskForm):
     id = HiddenField('')
     name = StringField('Nombre Completo', [DataRequired(), length(min=4, max=45, message=errors['name_len'])])
     email = EmailField('Correo electronico', [DataRequired(), Email(errors['email'])])
