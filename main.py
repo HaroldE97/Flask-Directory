@@ -11,15 +11,28 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 cache = Cache(config={'CACHE_TYPE': 'null'})
+errorsTypes = ['PageNotFound', 'InternalServerError']
 
 
 @app.before_request
 def before_request():
     pass
-    if 'username' not in session and request.endpoint in ['index', 'new']:
+    if 'username' not in session and request.endpoint in ['index', 'new', 'edit']:
         return redirect(url_for('login'))
     elif 'username'in session and request.endpoint in ['login', 'register']:
         return redirect(url_for('index'))
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    if request.path in ['/edit']:
+        return redirect(url_for('index'))
+    return render('error.html', error_number=404, error_type='Page Not Found', error=e), 404
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render('error.html', error_number=500, error_type='Internal Server Error', error=e), 500
+
 
 
 @app.route('/')
@@ -82,6 +95,29 @@ def new():
         return redirect(url_for('index'))
 
     return render('new.html', form=form)
+
+
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id=0):
+    form = ContactForm(request.form)
+    contact = Contact.query.get(id)
+    if request.method == 'POST':
+        contact.name = form.name.data
+        contact.email = form.email.data
+        contact.telefono = form.telefono.data
+        contact.domicilio = form.direccion.data
+
+        db.session.commit()
+
+        return redirect(url_for('index'))
+
+    form.id.data = contact.id
+    form.name.data = contact.name
+    form.email.data = contact.email
+    form.direccion.data = contact.domicilio
+    form.telefono.data = contact.telefono
+
+    return render('edit.html', form=form)
 
 
 if __name__ == '__main__':

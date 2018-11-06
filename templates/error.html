@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}Page Not Found{% endblock %}
+
+
+{% block head %}
+    <style>
+        body{
+            padding: 10vh 10vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+            color: white;
+        }
+
+        body.errorPageNotFound{ background-color: indianred; }
+        body.errorInternalServerError{ background-color: #c9c900; color: black; }
+
+        h1, h3, p{ color: inherit; margin-bottom: 1.25rem; }
+        h3{ font-weight: 100; }
+    </style>
+{% endblock %}
+
+
+{% block class_body %}
+    error{{error_type.replace(" ", "")}}
+{% endblock %}
+
+
+{% block body %}
+    <h1>Error {{error_number}}!</h1>
+    <h3>{{error_type}}...</h3>
+    <br><br>
+    <p>{{error}}</p>
+{% endblock %}
